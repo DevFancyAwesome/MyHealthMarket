@@ -1,0 +1,90 @@
+<section class="contact">
+  <div class="wrapper">
+    <div class="contact-info">
+      <h2>Contact info</h2>
+      <div class="contact-info-item">
+        <div class="icon">
+          <img src="{{ 'icon_pin_alt.svg' | asset_url }}" alt="">
+        </div>
+        <div class="text">
+          <div class="title">Address</div>
+          {{ section.settings.address }}
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon">
+          <img src="{{ 'icon_headphones.svg' | asset_url }}" alt="">
+        </div>
+        <div class="text">
+          <div class="title">Phone</div>
+          <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.phone }}</a>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon">
+          <img src="{{ 'icon_mail_alt.svg' | asset_url }}" alt="">
+        </div>
+        <div class="text">
+          <div class="title">Email Address</div>
+          <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon">
+          <img src="{{ 'icon_clock_alt.svg' | asset_url }}" alt="">
+        </div>
+        <div class="text">
+          <div class="title">Customer Service Hours</div>
+          {{ section.settings.opening_hours }}
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-page-form">
+      <h2>Get in touch</h2>
+      
+      {% form 'contact' %}
+        <input type="text" placeholder="Name" name="contact[name]">
+        {%- if form.errors contains 'email' -%}
+          Invalid Email
+        {%- endif -%}
+        <input type="email" placeholder="Email" name="contact[email]">
+        <textarea placeholder="Message" name="contact[message]"></textarea>
+        <button type="submit" class="btn btn-pink">Send Your Message</button>
+        {%- if form.posted_successfully? -%}
+          <p class="form-message form-message--success" tabindex="-1" data-form-status>
+            Thank you! Your message has been successfully sent. We will contact you soon!
+          </p>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "opening_hours",
+      "label": "Opening Hours"
+    }
+  ]
+}
+{% endschema %}

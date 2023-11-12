@@ -1,0 +1,47 @@
+<section class="shop-with-care">
+  <div class="wrapper">
+    <h2>{{ section.settings.title }}</h2>
+    {{ section.settings.text }}
+    {% if section.settings.button_url and section.settings.button_text %}
+      <a href="{{ section.settings.button_url }}" class="btn btn-pink">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+  <div class="image">
+    {% if section.settings.image %}
+      <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}">
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Shop with Care",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ]
+}
+{% endschema %}

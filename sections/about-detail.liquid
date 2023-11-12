@@ -1,0 +1,42 @@
+<section class="about-detail">
+  <div class="image">
+    {% if section.settings.image %}
+      <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}">
+    {% endif %}
+  </div>
+  <div class="wrapper">
+    <div class="text">
+      <h3>{{ section.settings.subtitle }}</h3>
+      <h2>{{ section.settings.title }}</h2>
+      {{ section.settings.text }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Detail",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ]
+}
+{% endschema %}

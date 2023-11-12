@@ -1,0 +1,38 @@
+<div class="product-card">
+  <div class="product {{product.type}}">
+      <div class="image">
+        {% if product.featured_image %}
+        <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}">
+        {% endif %}
+      </div>
+      <div class="company">{{ product.vendor }}</div>
+      <div class="title">
+        {% if product.metafields.global.title %}
+          {{ product.metafields.global.title }}
+        {% else %}
+          {{ product.title }}
+        {% endif %}
+      </div>
+      <div class="price">{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s> {% endif %}{{ product.price | money }}</div>
+  </div>
+  <div class="overlay">
+    <a href="{{ product.url }}" class="image">
+      {% if product.featured_image %}
+      <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}">
+      {% endif %}
+    </a>
+    <div class="company">{{ product.vendor }}</div>
+    <a href="{{ product.url }}" class="title">
+      {% if product.metafields.global.title %}
+        {{ product.metafields.global.title }}
+      {% else %}
+        {{ product.title }}
+      {% endif %}
+    </a>
+    <div class="price">{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s> {% endif %}{{ product.price | money }}</div>
+    <form action="/cart/add" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <input type="submit" value="ADD TO CART" class="btn">
+    </form>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+{% section 'header' %}
+<section class="hero hero-plp">
+	<div class="wrapper">
+		<h1>My Account</h1>
+		<h4>{{ "Logout" | customer_logout_link }}</h4>
+	</div>
+</section>
+<main class="my-account">
+	<div class="wrapper">
+		<div id="customer_orders">
+			<h2>My Orders</h2>
+			{% paginate customer.orders by 10 %}
+			{% if customer.orders.size != 0 %}
+			<table class="responsive-table">
+				<thead>
+					<tr>
+						<th scope="col">Order Number</th>
+						<th scope="col">Order Date</th>
+						<th scope="col">Payment Status</th>
+						<th scope="col">Shipping Status</th>
+						<th scope="col">Order Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in customer.orders %}
+					<tr>
+						<th data-label="Order Number" scope="row">
+							<a href="{{ order.customer_url }}" class="order-num" aria-label="Order Link">{{ order.name }}</a>
+						</th>
+						<td data-label="Order Date">{{ order.created_at | time_tag: format: 'date' }}</td>
+						<td data-label="Payment Status">{{ order.financial_status_label }}</td>
+						<td data-label="Shipping Status">{{ order.fulfillment_status_label }}</td>
+						<td data-label="Order Total">{{ order.total_price | money }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<p style="width: 100%; text-align: center;">You haven't placed any orders yet.</p>
+			{% endif %}
+			{{ paginate | default_pagination }}
+			{% endpaginate %}
+		</div>
+		<div id="customer_address" class="customer-address">
+			<h2>Default Address</h2>
+			{% if customer.default_address %}
+			<p>{{ customer.default_address.address1 }}</p>
+			{% if customer.default_address.address2 != "" %}
+			<p>{{ customer.default_address.address2 }}</p>
+			{% endif %}
+			<p>{{ customer.default_address.city}}, {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}</p>
+			<p>{{ customer.default_address.zip }}</p>
+			<p>{{ customer.default_address.phone }}</p>
+			<p><a href="{{ routes.account_addresses_url }}" style="display: none;">View Addresses</a></p>
+			{% endif %}
+		</div>
+	</div>
+</main>
+{% section 'footer' %}

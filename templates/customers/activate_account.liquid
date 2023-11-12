@@ -1,0 +1,14 @@
+{% section 'header' %}
+
+<section class="login-form">
+  <div class="wrapper">
+    <h2>Activate Account</h2>
+      {% form 'activate_customer_password' %} {{ form.errors | default_errors }}
+        <input type="password" value="" name="customer[password]" placeholder="Password" />
+        <input type="password" value="" name="customer[password_confirmation]" placeholder="Confirm Password" />
+        <button type="submit" class="btn btn-pink">Activate Account</button>
+      {% endform %}
+  </div>
+</section>
+
+{% section 'footer' %}

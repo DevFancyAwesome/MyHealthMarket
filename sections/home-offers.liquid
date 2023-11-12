@@ -1,0 +1,34 @@
+<section class="offers home-offers">
+  <div class="wrapper">
+    <ul>
+      {% for item in section.blocks %}
+        <li>{{ item.settings.offer | remove: '<p>' | remove: '</p>' }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Offers",
+  "blocks": [
+    {
+      "type": "offers",
+      "name": "Offer",
+      "settings": [
+        {
+          "id": "offer",
+          "type": "richtext",
+          "label": "Offer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Custom Content",
+      "name": "Home Offers"
+    }
+  ]
+}
+{% endschema %}

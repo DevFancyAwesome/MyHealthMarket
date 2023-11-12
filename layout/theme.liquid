@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta name="google-site-verification" content="SbiPcFW7WKfbbdtATtu-93elxhEPkVcklx5C7QtSCMU" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="shortcut icon" href="https://cdn.shopify.com/s/files/1/0880/6400/files/favicon.png?v=1611558443" type="image/png">
+
+  <title>{{ shop.name }}</title>
+
+  {% if page_description or page_description != '' %}
+  <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+  
+  {% if template contains 'index' %}
+  <meta name="google-site-verification" content="qfZZWXqfpfEQzYXaxB5TOnlHLv0z3I2XUq15s29l2xg" />
+  {% if page_title != blank and page_title != 'Welcome' %}
+  <title>{{ page_title }}</title>
+  {% else %}
+  <title>{{ shop.name }}</title>
+  {% endif %}
+  {% elsif template == '404' %}
+  <title>Page Not Found | {{ shop.name }}</title>
+  {% else %}
+  <title>{{ page_title }} - {{ shop.name }}</title>
+  {% endif %}
+  
+  {% include 'fb-open-graph' %}
+
+  {{ 'normalize.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+  {{ 'style.scss' | asset_url | stylesheet_tag }}
+  
+  {{ 'jquery-3.5.1.min.js' | asset_url | script_tag }}
+
+  {{ content_for_header }}
+
+  <!-- Hotjar Tracking Code for my site -->
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:3443772,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+</head>
+
+<body>
+  {{ content_for_layout }}
+
+  {{ 'slick.min.js' | asset_url | script_tag }}
+  {{ 'main.js' | asset_url | script_tag }}
+
+  <!-- Google Remarketing -->
+  {% include 'google_remarketing' %}
+  <!-- End Google Remarketing -->
+  
+  <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"25018082"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+  {% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% comment %}{% include 'booster-discounts' %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}{% endcomment %}
+  <style>.additional-checkout-buttons {
+    display: none !important;
+}</style>
+
+  {% comment %}
+  {% if template.name == "index" %} 
+  <div id="popup" class="popup_form" style="display:none">
+    <div class="close" onclick="closePopup()">x</div>
+    <div class="left desktop">
+      
+      <div class="top_heading"><h2>Free Bottle of Micro Day</h2>
+        <p class="val_91">$208 VALUE!</p></div>
+      <div class="col_2">
+        <div class="col_2_1">
+        <img src="https://cdn.shopify.com/s/files/1/0880/6400/files/micro_day_f894b76f-88ef-4b76-93e4-611d31596520.png?v=1672327705">
+        </div>
+        <div class="col_2_2">
+        <p>with every $199.95 you spend</p>
+        {% form 'customer', id: formId, novalidate: 'novalidate' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input class="email" type="email" name="contact[email]" placeholder="Email Address" required>          
+        <button class="popup_btn">Submit</button>
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success" tabindex="-1" data-form-status>
+          Thank you for subscribing!
+        </p>
+        {%- endif -%}
+        {% endform %}
+        </div>
+      </div>
+    </div>
+    <div class="right desktop">
+      
+     
+    </div>
+    <div class="popup_content mobile">
+           
+      <div class="img_h2">
+        <h2 class="mob_head">Free bottle of<br> <span>Neocutis Microday</span></h2></div>
+      <p class="value_mob mobile">$208 VALUE!</p>
+      <p>with every $199.95 you spend!</p>
+      
+      {% form 'customer', id: formId  %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input class="email" type="email" name="contact[email]" placeholder="Email Address" required>          
+          <button class="popup_btn">Submit</button>
+          {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success" tabindex="-1" data-form-status>
+              Thank you for subscribing!
+            </p>
+          {%- endif -%}
+	{% endform %}
+    </div>
+    <p class="tc">*while supplies last</p>
+    
+  </div>
+  <style type="text/css">
+    div#popup .close{
+
+    }
+    .mobile{
+      display:none;
+    }
+    div#popup {
+      display: block;
+      width: 51.8vw;
+      min-height: 38vh;
+      position: fixed;
+      left: calc(50% - 25.9vw);
+      z-index: 99;
+      top: 23vh;
+      background: #d1ecf4;
+      border: 2px solid white;
+      padding: 50px 20px;
+      z-index: 1000000002;
+    }
+    @media (min-width: 1000px) {
+      div#popup {
+        padding: 3.472vw 1.389vw;
+      }
+    }
+    #popup .left h4 {
+      color: #ee2fba;
+      font-size: 1.5vw;
+      margin-bottom: 1vw;
+    }
+    #popup h2{
+      font-size: 4.33vw;
+      margin-bottom:unset!important;
+    }
+    #popup .col_2 img{
+      max-width:100px!important;
+    }
+
+    .top_heading {
+      position: relative;
+      display: inline-block;
+    }
+    #popup .top_heading p.val_91 {
+      padding: 0px!important;
+      right:2.2vw;
+      margin-top: -6px;
+      position: absolute;
+    }
+    #popup .left input.email{
+      margin-bottom:0px;
+    }
+    #popup form{
+      display:flex;
+    }
+    #popup .left p {
+      font-size: 1.7vw;
+      font-weight: bold;
+      line-height: 1em;
+      padding-top: 2.5vw;
+    }
+    #popup .left {
+      width: 100%;
+      display: block;
+      float:left;
+      text-align: center;
+    }
+    #popup .right{
+      width:34%;
+      display: block;
+      float:left
+    }
+
+    #popup .right img {
+      max-height: 15vw;
+      width: unset;
+      margin: auto;
+      display: block;
+    }
+    #popup .left input.email {
+      padding: 0.7vw 1vw;
+      border-radius: 40px;
+      border: 1px solid #DAEAEA;
+      margin-bottom: 1.2vw;
+      width: 90%;
+      text-align: center;
+      margin-bottom:0px;
+    }
+    #popup button.popup_btn {
+      padding: 0.7vw 2.3vw;
+      border: none;
+      background: #01dada;
+      text-transform: uppercase;
+      font-weight: bold;
+      border-radius: 30px;
+    }
+    #popup p.tc {
+      position: absolute;
+      bottom: 0.6vw;
+      left: 0;
+      font-weight: 500;
+      margin-bottom: 0px;
+      width: 100%;
+      text-align: center;
+    }
+    #popup .right p {
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2vw;
+      color: #03DADB;
+    }
+    #popup .close {
+      position: absolute;
+      right: 0.5vw;
+      top: 0px;
+      font-weight: bold;
+      font-size: 2.2vw;
+      line-height: 1;
+      cursor: pointer;
+    }
+    body.overlayPop:after {
+      position: fixed;
+      content: '';
+      width: 100vw;
+      height: 100vh;
+      top: 0px;
+      left: 0;
+      background: #0000007a;
+      display: block;
+      z-index: 1000000001;
+    }
+    #popup .left input.email::placeholder {
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: bold;
+      color: #b3b3b3;
+    }
+    #popup .col_2 .col_2_1 {
+      width: 20%;
+      float:left;
+    }
+    #popup .col_2 .col_2_2{
+      width:80%;
+      float:left;
+      padding-right: 15%;
+    }
+    #popup .col_2_2 p {
+      font-size: 2.2vw;
+      padding-top: 3.5vw;
+    }
+    #popup .col_2 img {
+      max-width: 3vw!important;
+      padding-top: 30px;
+      height: unset!important;
+
+    }
+    #popup .col_2_2 form input[type=email] {
+      border: 3px solid #deebea!important;
+      margin-right: 10px;
+    }
+    #popup form.contact-form {
+      margin-bottom: 2vw;
+    }
+    @media screen and (max-width:999px){
+      .mobile{
+        display:block;
+      }
+      .desktop{
+        display:none!important;
+      }
+      #popup .left p{
+        margin-bottom:1vw;
+      }
+      #popup input.email::placeholder {
+        font-size: 1rem!important;
+        letter-spacing: 0.06rem!important;
+        color: #919eab!important;
+      }
+      div#popup {
+        display: block;
+        width: 90vw;
+        min-height: 29vh;
+        position: fixed;
+        left: 5vw;
+        top: 9vw;
+        padding-bottom: 12vw;
+        padding-top: 9vw;
+      }
+      .popup_content.mobile img {
+        display: inline-block;
+        max-width: 20vw;
+      }
+      #popup h2 {
+        font-size: 19.33vw;
+        line-height:1.1em;
+      }
+      .popup_content.mobile h4 {
+        margin-bottom: 0px;
+        margin-top: 10px;
+        color: #ee2fba;
+        font-size: 3.7vw;
+      }
+      #popup .left input.email, #popup button.popup_btn {
+        font-size: 1.9vw;
+      }
+      #popup p.tc {
+        position: absolute;
+        bottom: 10px;
+        font-weight: 500;
+        margin-bottom: 0px;
+        font-size:14px;
+      }
+      #popup .right img {
+        max-height: 20vw;
+        width: unset;
+        margin: auto;
+        display: block;
+      }
+      #popup .close {
+        font-size: 8vw;
+        right: 2vw;
+      }
+
+      #popup .left p {
+        font-size: 2.2vw;
+      }
+      #popup .right p {
+        margin-bottom: 0px;
+      }
+      .img_h2 h2 {
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        padding-top: 4%;
+      }
+      h2.mob_head {
+        font-size: 9.8vw!important;
+      }
+      h2.mob_head span {
+        font-size: 14.1vw;
+      }
+
+      
+      .popup_content.mobile .img_h2 + p {
+        font-size: 6.5vw;
+        line-height: 1em;
+        font-weight: bold;
+        margin-bottom:10px;
+      }
+      #popup form{
+      	display:unset;
+      }
+      p.value_mob.mobile + p {
+        font-size: 5vw;
+        font-weight: bold;
+        margin-bottom: 0px;
+      }
+      .popup_content.mobile input.email::placeholder {
+        opacity: 0.8;
+        letter-spacing:0.2rem;
+      }
+      .popup_content.mobile input.email {
+        font-size: 3.6vw;
+      }
+
+      .popup_content.mobile input.email {
+        width: 70%;
+        display: block;
+        margin: auto;
+        border: none;
+        border-radius: 40px;
+        text-align: center;
+        padding: 1.5vw;
+        text-transform: uppercase;
+        font-weight: bold;
+        border: 4px solid #DAEAEA;
+      }
+      .popup_content button.popup_btn {
+        font-size: 3.5vw!important;
+        margin-top: 3vw;
+        padding: 2vw 7vw!Important;
+      }
+      #popup p.tc{
+        font-size:3.4vw;
+      }
+    }
+    @media screen and (max-width:600px){
+
+
+    }
+  </style>
+  <script type="text/javascript">
+    var t = setTimeout(function() {
+      openPopup();
+      clearTimeout(t);
+    }, 1000);
+    function closePopup(){
+      jQuery('#popup').hide();
+      jQuery('body').removeClass('overlayPop');
+    }
+    function openPopup(){
+      jQuery('#popup').show();
+      jQuery('body').addClass('overlayPop');
+    }
+  </script>
+  {% endif %}
+  {% endcomment %}
+{% include 'ba-discounts' %}
+</body>
+</html>

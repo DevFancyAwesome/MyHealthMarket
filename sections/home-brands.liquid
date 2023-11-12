@@ -1,0 +1,78 @@
+<section class="home-brands">
+  <div class="wrapper">
+    <h3>{{ section.settings.subtitle }}</h3>
+    <h2>{{ section.settings.title }}</h2>
+    <div class="brands">
+      {% for block in section.blocks %}
+        {% if block.settings.brand_url %}
+          <a href="{{ block.settings.brand_url }}" class="brand">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+            {% endif %}
+          </a>
+        {% else %}
+          <div class="brand">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% if section.settings.button_url and section.settings.button_text %}
+      <a href="{{ section.settings.button_url }}" class="btn btn-black">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Brands",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Custom Content",
+      "name": "Home Brands"
+    }
+  ]
+}
+{% endschema %}

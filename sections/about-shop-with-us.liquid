@@ -1,0 +1,54 @@
+<section class="shop-with-us">
+  <div class="wrapper">
+    <h2>{{ section.settings.title }}</h2>
+    <div class="cards">
+      {% for card in section.blocks %}
+        <div class="card">
+          <div class="icon">
+            {% if card.settings.icon %}
+              <img src="{{ card.settings.icon | img_url: 'master' }}" alt="">
+            {% endif %}
+          </div>
+          <div class="title">{{ card.settings.title }}</div>
+          <div class="text">{{ card.settings.text | newline_to_br }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Shop With Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "id": "icon",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Title"
+        },
+        {
+          "id": "text",
+          "type": "textarea",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

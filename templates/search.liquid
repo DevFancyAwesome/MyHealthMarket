@@ -1,0 +1,106 @@
+{% section 'header' %}
+
+<section class="hero hero-plp">
+  <div class="wrapper">
+    <div class="text">
+      <h1>Search Results <br> for <i>{{ search.terms }}</i></h1>
+    </div>
+  </div>
+</section>
+
+<section class="product-grid product-grid-plp">
+  <div class="wrapper">
+    {% if search.results_count > 0 %}
+      {% paginate search.results by 12 %}
+        <div class="products">
+          {% for product in search.results %}
+            {% if product.id != 8053275328819 %}
+            <div class="product-card">
+              <a href="{{product.url}}">
+                <div class="image">
+                  {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}">
+                  {% endif %}
+                </div>
+              </a>
+              <div class="company">{{ product.vendor }}</div>
+              {% if product.metafields.global.title %}
+              <div class="title">{{ product.metafields.global.title }}</div>
+              {% else %}
+              <div class="title">{{ product.title }}</div>
+              {% endif %}
+              <div class="price">{{ product.price | money }}</div>
+              <div class="overlay">
+                <a href="{{ product.url }}" class="image">
+                  {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}">
+                  {% endif %}
+                </a>
+                <div class="company">{{ product.vendor }}</div>
+                <a href="{{ product.url }}" class="title">
+                  {% if product.metafields.global.title %}
+                  <div class="title">{{ product.metafields.global.title }}</div>
+                  {% else %}
+                  <div class="title">{{ product.title }}</div>
+                  {% endif %}
+                </a>
+                <div class="price">{{ product.price | money }}</div>
+                <form action="/cart/add" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                  <input type="submit" value="ADD TO CART" class="btn">
+                </form>
+              </div>
+              {% comment %}
+              <div class="overlay">
+                <div class="overlay-buttons">
+                  <form action="/cart/add" method="post" id="product-form-{{ product.id }}">
+                    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                    <button type="submit" name="add" class="cart"><img src="{{ 'bag.png' | asset_url }}" alt=""></button>              
+                  </form>
+                  <a href="#">
+                    <img src="{{ 'lnr-heart.svg' | asset_url }}" alt="">
+                  </a>
+                  <a href="{{ product.url }}">
+                    <img src="{{ 'lnr-eye.svg' | asset_url }}" alt="">
+                  </a>
+                </div>
+              </div>
+              {% endcomment %}
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="pagination">
+          <ul>
+            {% if paginate.previous.is_link %}
+              <li class="prev">
+                <a href="{{ paginate.previous.url }}"></a>
+              </li>
+            {% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <li>
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                </li>
+              {% else %}
+                <li class="active">
+                  <a>{{ part.title }}</a> 
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if paginate.next.is_link %}
+              <li class="next">
+                <a href="{{ paginate.next.url }}"></a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endpaginate %}
+    {% else %}
+      <div class="nothing-found">Nothing Found</div>
+    {% endif %}
+  </div>
+</section>
+
+{% section 'footer' %}

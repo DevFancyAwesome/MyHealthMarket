@@ -1,0 +1,77 @@
+<section class="subscription">
+  <div class="wrapper">
+    <h3>Welcome</h3>
+    <h2>Become a MHM Insider</h2>
+    <p>
+      Every month we offer exclusive savings on Neocutis products to our Insiders. Join our list to become an Insider:
+    </p>
+
+    {% form 'customer', id: formId, novalidate: 'novalidate' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input class="email" type="email" name="contact[email]" placeholder="Enter Email Address" required>          
+          <button class="btn btn-pink">Submit</button>
+          {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success" tabindex="-1" data-form-status>
+              Thank you for subscribing!
+            </p>
+          {%- endif -%}
+	{% endform %}
+  </div>
+</section>
+
+<footer>
+  <div class="wrapper">
+    <a href="/" class="logo">
+      {% if section.settings.logo_img != blank %}
+        <img src="{{ section.settings.logo_img | img_url: 'master' }}">
+      {% else %}
+        {{ section.settings.logo }}
+      {% endif %}
+    </a>
+    <nav>
+      <ul class="footer-menu">
+        {% for link in linklists.footer-new.links %}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="copyright">© <script>document.write(new Date().getFullYear())</script> MY HEALTH MARKET All Rights Reserved</div>
+    <div class="payment-footer">
+    {% unless shop.enabled_payment_types == empty %}
+    {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,stripe,visa' | split: ',' -%}
+    <ul class="payment-icons list--inline">
+      {% for type in shop.enabled_payment_types %}
+      {% if payment_icons_available contains type %}
+      <li class="payment-icon">
+        {%- assign icon_name = type | prepend: 'icon-' -%}
+        {% include icon_name %}
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% endunless %}
+    
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo",
+      "label": "Logo",
+      "default": "MYHEALTH.MARKET"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img",
+      "label": "Logo Image"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+<header>
+  <div class="wrapper">
+    <a href="/" class="logo">
+      {% if section.settings.logo_img != blank %}
+        <img src="{{ section.settings.logo_img | img_url: 'master' }}">
+      {% else %}
+        {{ section.settings.logo }}
+      {% endif %}
+    </a>
+
+    <a href="/cart" class="cart desktop-hidden">
+      <img src="{{ 'bag.png' | asset_url }}" alt="">
+      {% if cart.item_count > 0 %}
+        <span class="cart-count">{{ cart.item_count }}</span>
+      {% endif %}
+    </a>
+
+    <nav>
+      <ul class="main-menu">
+        {% for link in linklists.main-menu-new.links %}
+          <li {% if link.active %} class="active" {% endif %}>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <div class="right-block">
+        <a href="/pages/about" {% if page.url == '/pages/about' %} class="active" {% endif %}>ABOUT</a>
+
+        <div class="icons">
+          {% if customer %}
+            <a href="/account" class="account">
+              <img src="{{ 'user.png' | asset_url }}" alt="">
+            </a>
+          {% else %}
+            <a href="/account/login" class="account">
+              <img src="{{ 'user.png' | asset_url }}" alt="">
+            </a>
+          {% endif %}
+
+          <a href="/cart" class="cart">
+            <img src="{{ 'bag.png' | asset_url }}" alt="">
+            {% if cart.item_count > 0 %}
+              <span class="cart-count">{{ cart.item_count }}</span>
+            {% endif %}
+          </a>
+
+          <a href="#" class="search">
+            <img src="{{ 'lnr-magnifier.svg' | asset_url }}" alt="">
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <form action="/search">
+      <input type="hidden" name="type" value="product" />
+      <input type="text" name="q" placeholder="Search" />
+      <button type="submit"></button>
+      <div class="close">
+        <img src="{{'close-outline.svg' | asset_url}}">
+      </div>
+    </form>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo",
+      "label": "Logo",
+      "default": "MYHEALTH.MARKET"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img",
+      "label": "Logo Image"
+    }
+  ]
+}
+{% endschema %}

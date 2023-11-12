@@ -1,0 +1,51 @@
+<section class="preseve-skin">
+  <div class="wrapper">
+    <h2>{{ section.settings.title }}</h2>
+    {{ section.settings.text }}
+    {% if section.settings.button_url and section.settings.button_text %}
+      <a href="{{ section.settings.button_url }}" class="btn btn-pink">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+  {% if section.settings.bg_image %}
+    <img src="{{ section.settings.bg_image | img_url: 'master' }}">
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Home Preseve Skin",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Custom Content",
+      "name": "Home Preseve Skin"
+    }
+  ]
+}
+{% endschema %}

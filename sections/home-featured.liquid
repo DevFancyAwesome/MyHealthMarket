@@ -1,0 +1,61 @@
+<section class="home-featured">
+  <div class="text">
+    <h3>{{ section.settings.subtitle }}</h3>
+    <h2>{{ section.settings.title }}</h2>
+    {{ section.settings.text }}
+    {% if section.settings.button_url and section.settings.button_text %}
+      <a href="{{ section.settings.button_url }}" class="btn btn-pink">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+  <div class="featured-product">
+    <div class="product">
+      {% if section.settings.product %}
+        <img src="{{ section.settings.product | img_url: 'master' }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Featured",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "product",
+      "label": "Product Image"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Custom Content",
+      "name": "Home Featured"
+    }
+  ]
+}
+{% endschema %}

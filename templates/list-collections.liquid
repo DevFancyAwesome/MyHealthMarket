@@ -1,0 +1,30 @@
+{% section 'header' %}
+
+<section class="hero hero-plp">
+  <div class="wrapper">
+    <div class="text">
+      <h1>Collections</h1>
+    </div>
+  </div>
+</section>
+
+<section class="product-grid product-grid-plp">
+  <div class="wrapper">
+    <div class="collections">
+        {% for collection in collections %}
+          {% unless collection.handle == 'frontpage' %}
+            <a href="{{ block.settings.link_url }}" class="collection">
+              <span class="title">{{ collection.title }}</span>
+              {% if collection.image %}
+                <img src="{{ collection | img_url: '450x450' }}" alt="{{ collection.image.alt }}" />
+              {% else %}
+                <img src="{{ collection.products.first | img_url: '450x450' }}" alt="{{ collection.title | escape  }}" />
+              {% endif %}
+            </a>
+          {% endunless %}
+        {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% section 'footer' %}

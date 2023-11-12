@@ -1,0 +1,104 @@
+{% section 'header' %}
+
+{% assign variant_id = '44164472504627' %}
+
+<section class="hero hero-plp">
+	<div class="wrapper">
+		<h1>Shopping Cart</h1>
+	</div>
+</section>
+
+<section class="cart-section">
+  <div class="wrapper">
+    
+    {% if cart.item_count > 0 %}
+    <form action="/cart" method="post">
+      <div class="cart-table">
+        <div class="table-head">
+          <div class="image"></div>
+          <div class="title">Product</div>
+          <div class="quantity">Quantity</div>
+          <div class="price">Price</div>
+          <div class="remove"></div>
+        </div>
+        {% assign original_total = 0 %}
+        {% for line_item in cart.items %}
+          <div class="table-row" data-id="{{ line_item.id }}">
+            <a href="{{ line_item.url }}" class="image">
+              {{ line_item | img_url: '200x200' | img_tag }}
+            </a>
+            <div class="title">
+              <a href="{{ line_item.url }}">{{ line_item.title }}
+<!-- <span class='booster-cart-item-success-notes' data-key='{{line_item.key}}'></span><span class='booster-cart-item-upsell-notes' data-key='{{line_item.key}}'></span> -->
+              </a>              
+            </div>
+            <div class="quantity">
+              <input
+                type="text"
+                size="4"
+                value="{{ line_item.quantity }}"
+                id="updates_{{ line_item.id }}"
+                name="updates[]"
+              />
+            </div>
+            <div class="price">
+              {% if line_item.variant.compare_at_price > line_item.final_price %}
+                <s>{{ line_item.variant.compare_at_price | money }}</s><div>&nbsp;</div>
+              {% endif %}
+              {{ line_item.final_price | money }}
+            </div>
+            {% assign original_price = line_item.variant.compare_at_price | times: line_item.quantity %}
+            {% assign original_total = original_total | plus: original_price %}
+            <div class="remove">
+              <a href="/cart/change?line={{ forloop.index }}&quantity=0">Remove</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="total">
+        <div class="cart-row">Total: <s>{{ original_total | money }}</s>&nbsp;<span class="wh-original-cart-total"><span class='wh-original-price'>{{ cart.total_price | money }}</span></span><span class="wh-cart-total"></span></div>
+        {% comment %}
+          <div class="additional-notes"><span class="wh-minimums-note">If you spend at least $199.95, you will get a free bottle of Micro Day automatically</span><span class="wh-extra-note"></span></div>
+        {% endcomment %}
+      </div>
+      <input type="submit" value="Update quantities" style="display: none;" />
+      <input type="submit" name="checkout" value="Checkout" class="btn btn-pink" />
+    </form>
+    {% else %}
+    	Your cart is empty
+    {% endif %}
+    {% if additional_checkout_buttons %}
+<div class="additional-checkout-buttons">
+  {{ content_for_additional_checkout_buttons }}
+</div>
+{% endif %}
+  </div>
+</section>
+
+{% comment %}
+<script>
+  $(document).ready(function() {
+    var giftAddedNum = 0;
+    if ($('.table-row[data-id="44164472504627"]').length) {
+      giftAddedNum = $('.table-row[data-id="44164472504627"] .quantity input').val();
+    }
+    var total = {{cart.total_price}};
+    var giftNum = Math.floor(total / 19995);
+    if (giftNum != giftAddedNum) {
+      var cartUpdates = { {{ variant_id }}: giftNum };
+      var params = {
+        type: 'POST',
+        url: '/cart/update.js',
+        data: { updates: cartUpdates },
+        dataType: 'json',
+        success: function(stuff) { 
+          window.location.reload();
+        }
+      };
+      $.ajax(params);
+    }
+  })
+</script>
+{% endcomment %}
+
+{% section 'footer' %}

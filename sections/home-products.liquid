@@ -1,0 +1,63 @@
+<section class="home-products">
+  <div class="row">
+    <div class="text">
+      <h3>{{ section.settings.subtitle }}</h3>
+      <h2>{{ section.settings.title | newline_to_br }}</h2>
+      {{ section.settings.text }}
+    </div>
+    {% if section.settings.collection %}
+      <div class="home-products-slider">
+        {% for product in collections[section.settings.collection].products %}
+          {% include 'product-card' with product %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>		
+  {% if section.settings.button_url and section.settings.button_text %}
+    <a href="{{ section.settings.button_url }}" class="btn btn-black">{{ section.settings.button_text }}</a>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Home Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Custom Content",
+      "name": "Home Products"
+    }
+  ]
+}
+{% endschema %}

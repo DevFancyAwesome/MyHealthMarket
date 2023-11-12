@@ -1,0 +1,44 @@
+{% section 'header' %}
+<style>
+  .resetPass {
+  	display: none;
+  }
+</style>
+<section class="login-form">
+  <div class="wrapper">
+    <h2 class="signIn">Sign In</h2>
+    {% form 'customer_login', class: 'signIn' %} {{ form.errors | default_errors }}
+      <input type="email" name="customer[email]" placeholder="Email Address" />
+      <input type="password" name="customer[password]" placeholder="Password" />
+      <button type="submit" class="btn btn-pink">Sign In</button>
+    {% endform %}
+    
+    <h2 class="resetPass">Forgot Password</h2>
+    {% form 'recover_customer_password', class: 'resetPass' %}
+      {{ form.errors | default_errors }}
+      <input type="email" name="email" placeholder="Email Address">
+      <button type="submit" class="btn btn-pink">Submit</button>
+    {% endform %}
+    <div class="links">
+      Don't have an account? <a href="/account/register">Sign Up</a><br/>
+      <a href="/account/login#recover" class="forgotPass signIn">Forgot My Password</a>
+      <a href="/account/login#recover" class="resetPass logIn">Sign In</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  jQuery(document).ready(function($) {
+    $(".forgotPass").on("click", function() {
+      $(".resetPass").show();
+      $(".signIn").hide();
+    });
+    
+    $(".logIn").on("click", function() {
+      $(".resetPass").hide();
+      $(".signIn").show();
+    });
+  });
+</script>
+
+{% section 'footer' %}

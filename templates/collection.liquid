@@ -1,0 +1,139 @@
+{% section 'header' %}
+
+<section class="hero hero-plp">
+  <div class="wrapper">
+    <div class="text">
+      {% if collection.metafields.global.title %}
+      	<h1>{{ collection.metafields.global.title }}</h1>
+      {% else %}
+        <h1>{{ collection.title }}</h1>
+      {% endif %}
+      
+      {% if collection.metafields.global.description %}
+      	<p>{{ collection.metafields.global.description }}</p>
+      {% else %}
+        <p>{{ collection.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="hero-mobile-text">
+  <div class="wrapper">			
+    <p>{{ collection.description }}</p>
+  </div>
+</section>
+
+<section class="offers plp-offers">
+    <div class="wrapper">
+        <ul>
+            <li><strong>25% off</strong> Neocutis products</li>
+        </ul>
+    </div>
+</section>
+
+<section class="filters">
+  <div class="wrapper">
+    <div class="filter">
+      <div class="filter-title">Browse</div>
+      <ul>
+        {% for coll in collections %}
+          {% unless coll.handle == 'frontpage' %}
+
+            {% unless coll.handle == collection.handle %}
+              <li>
+                <a href="{{ coll.url }}" title="{{ coll.title | escape }}">{{ coll.title | escape }}</a>
+              </li>
+            {% else %}
+              <li class="active">
+                <a href="{{ coll.url }}" title="{{ coll.title | escape }}">{{ coll.title | escape }}</a>
+              </li>
+            {% endunless %}
+
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="filter">
+      <div class="filter-title">Sort By</div>
+      <ul class="sortBy">
+        <li class="sort-by price-ascending" data-sort="price-ascending"><a href="javascript:;">Price: Low to High</a></li>
+        <li class="sort-by price-descending" data-sort="price-descending"><a href="javascript:;">Price: High to Low</a></li>
+        <li class="sort-by title-ascending" data-sort="title-ascending"><a href="javascript:;">Name: A to Z</a></li>
+        <li class="sort-by title-descending" data-sort="title-descending"><a href="javascript:;">Name: Z to A</a></li>
+        <li class="sort-by created-ascending" data-sort="created-ascending"><a href="javascript:;">Oldest to Newest</a></li>
+        <li class="sort-by created-descending" data-sort="created-descending"><a href="javascript:;">Newest to Oldest</a></li>
+        <li class="sort-by best-selling" data-sort="best-selling"><a href="javascript:;">Popular</a></li>
+        <li class="sort-by manual" data-sort="manual"><a href="javascript:;">Featured</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="product-grid product-grid-plp">
+  <div class="wrapper">
+    {% paginate collection.products by 12 %}
+      <div class="products">
+        {% for product in collection.products | sort: 'best-selling' %}
+          {% include 'product-card' %}
+        {% endfor %}
+      </div>
+
+          {{ page.url }}
+      <div class="pagination">
+        <ul>
+          {% if paginate.previous.is_link %}
+            <li class="prev">
+              <a href="{{ paginate.previous.url }}"></a>
+            </li>
+          {% endif %}
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <li>
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              </li>
+            {% else %}
+              {% if part.title == paginate.current_page %}
+                <li class="active">
+                  <a>{{ part.title }}</a> 
+                </li>
+              {% else %}
+                <li class="no-link">
+                  <a>{{ part.title }}</a> 
+                </li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% if paginate.next.is_link %}
+            <li class="next">
+              <a href="{{ paginate.next.url }}"></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endpaginate %}
+  </div>
+</section>
+
+{% section 'footer' %}
+
+<script type="text/javascript">
+  Shopify.queryParams = {};
+  var val_default = '{{ collection.sort_by | default: collection.default_sort_by }}';
+  jQuery('.sortBy li.sort-by').removeClass('active');
+  
+  jQuery('.sortBy li.' + val_default).addClass('active');
+  
+  jQuery('.sortBy li.sort-by').click(function(){  // add event any time the sort box changes
+    if(!$(this).hasClass('active')){
+      console.log(Shopify)
+      var value = jQuery(this).attr('data-sort');
+      Shopify.queryParams.sort_by = value;
+      location.search = jQuery.param(Shopify.queryParams);
+    }
+  });
+
+  jQuery('.filter').hover(function() {
+    $(this).find('ul').slideToggle(200)
+  })
+</script>

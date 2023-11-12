@@ -1,0 +1,122 @@
+{% section 'header' %}
+<section class="offers product-offers">
+  <div class="wrapper">
+    <ul>
+      <li><strong>25% off</strong> Neocutis products</li>
+    </ul>
+  </div>
+</section>
+<div class="pdp">
+  <section class="product">
+    <div class="wrapper">
+      <h1>
+        {% if product.metafields.global.title %}
+          {{ product.metafields.global.title }}
+        {% else %}
+          {{ product.title }}
+        {% endif %}
+      </h1>
+      {% assign collections = product.collections %}
+      {% for collection in collections %}
+        {% if collection.handle == 'neocutis' %}
+          {% assign is_neocutis = true %}
+        {% endif %}
+      {% endfor %}
+      <div class="product-slider">
+        <div class="slider-for">
+          {% for image in product.images %}
+            <div class="slide {% if product.compare_at_price %} sale {% endif %}">
+              <div class="image">
+                <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}">
+              </div>
+            </div>
+            {% comment %}
+            {% if forloop.index == 1 and is_neocutis %}
+              <div class="slide">
+                <div class="image">
+                  <img src="https://cdn.shopify.com/s/files/1/0880/6400/files/MHM_Neocutis_Micro_Day_FREE_GIFT_product_image.jpg?v=1676291084">
+                </div>
+              </div>
+            {% endif %}
+            {% endcomment %}
+          {% endfor %}
+        </div>
+        <div class="slider-nav">
+          {% for image in product.images %}
+            <div class="slide">
+              <div class="image">
+                <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}">
+              </div>
+            </div>
+            {% comment %}
+            {% if forloop.index == 1 and is_neocutis %}
+              <div class="slide">
+                <div class="image">
+                  <img src="https://cdn.shopify.com/s/files/1/0880/6400/files/MHM_Neocutis_Micro_Day_FREE_GIFT_product_image.jpg?v=1676291084">
+                </div>
+              </div>
+            {% endif %}
+            {% endcomment %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="description">
+        {{ product.metafields.global.description }}
+      </div>
+      <div class="price">
+        {% if product.compare_at_price and product.compare_at_price != product.price %}
+          <span class="old-price">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+        {{ product.price | money }}
+      </div>
+      <div class="pdp-form">
+        <div class="row">
+          <form action="/cart/add" method="post" id="product-form-{{ product.id }}">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <div class="number">
+              <span class="decrease button">&ndash;</span>
+              <input type="number" value="01" min="1" max="99" name="quantity">
+              <span class="increase button">+</span>
+            </div>
+            <button type="submit" name="add">Add to BAG</button>
+          </form>
+          <div id="smartwishlist" class="like" data-product="{{ product.id }}" data-variant="{{ product.variants.first.id }}"></div>
+        </div>
+        <div class="offer">
+          {% include 'viabill' %}
+        </div>
+      </div>
+
+      <div class="info">        
+        {{ product.description }}
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+
+
+{% for col in product.collections %}
+  {% if col.all_products_count > 2 %}
+	{% assign collection = col %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if collection %}
+  <section class="more-products products-page">
+    <div class="wrapper">
+      <h2>More Products You’ll Love</h2>
+      <div class="more-products-slider">
+        {% for prod in collection.products | limit: 4 %}
+          {% include 'product-card' with product: prod %}
+        {% endfor %}
+      </div>
+      <a href="{{ collection.url }}" class="btn btn-pink">Shop All</a>
+    </div>
+  </section>
+{% endif %}
+
+{% section 'footer' %}

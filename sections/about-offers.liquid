@@ -1,0 +1,28 @@
+<section class="offers about-offers">
+  <div class="wrapper">
+    <ul>
+      {% for item in section.blocks %}
+        <li>{{ item.settings.offer | remove: '<p>' | remove: '</p>' }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Offers",
+  "blocks": [
+    {
+      "type": "offers",
+      "name": "Offer",
+      "settings": [
+        {
+          "id": "offer",
+          "type": "richtext",
+          "label": "Offer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

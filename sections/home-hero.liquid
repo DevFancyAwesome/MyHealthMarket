@@ -1,0 +1,54 @@
+<section class="hero hero-home" {%if section.settings.img %}style="background-image: url({{ section.settings.img | img_url : 'master' }});"{%endif%}>
+  <div class="wrapper">
+    <div class="text">
+      <h1>{{ section.settings.title }}</h1>
+      {% if section.settings.button_url and section.settings.button_text %}
+        <a href="{{ section.settings.button_url }}" class="btn btn-pink">{{ section.settings.button_text }}</a>
+      {% endif %}
+      {% if section.settings.discount_banner != blank %}
+        <div class="discount-banner">
+          {{ section.settings.discount_banner }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "image label"
+    },
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "html",
+      "id": "discount_banner",
+      "label": "Discount Banner"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Custom Content",
+      "name": "Home Hero"
+    }
+  ]
+}
+{% endschema %}
