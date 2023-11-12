@@ -56,7 +56,7 @@
         {% endfor %}
       </div>
       <div class="total">
-        <div class="cart-row">Total: <s>{{ original_total | money }}</s>&nbsp;<span class="wh-original-cart-total"><span class='wh-original-price'>{{ cart.total_price | money }}</span></span><span class="wh-cart-total"></span></div>
+        <div class="cart-row">Total: {% comment %}<s>{{ original_total | money }}</s>&nbsp;{% endcomment %}<span class="wh-original-cart-total"><span class='wh-original-price'>{{ cart.total_price | money }}</span></span><span class="wh-cart-total"></span></div>
         {% comment %}
           <div class="additional-notes"><span class="wh-minimums-note">If you spend at least $199.95, you will get a free bottle of Micro Day automatically</span><span class="wh-extra-note"></span></div>
         {% endcomment %}
